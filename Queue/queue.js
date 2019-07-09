@@ -16,7 +16,6 @@ class Queue{
 peek(){
     console.log(this.first)
     return this.first;
-
 }
 
 enqueue(v){
@@ -54,4 +53,3 @@ myQueue.dequeue();
 myQueue.peek();
 myQueue.dequeue();
 myQueue.peek();
-
