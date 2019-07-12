@@ -19,7 +19,6 @@ class StacksQueue{
         this.data.splice(0,1);
     }
     peek(){
-
         console.log(this.data)
     }
 }
