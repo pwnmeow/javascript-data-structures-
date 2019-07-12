@@ -1,19 +1,3 @@
-// level 0: 2^0 = 1;
-// level 1: 2^1 = 2;
-// level 2: 2^2 = 4;
-// level 3: 2^3 = 8;
-
-// # number of nodes = 2^H -1; h being the height 
-// log nodes = steps;
-
-// log 100 = 2
-// 10^2 = 100;
-
-// bainary search tree - is really good with searching 
-// all the right side of bst should be greater then the root node 
-// and all the left should be decreaseing 
-// nodes can have only two children like not odd numbers it should be a perfect bainary tree
-
 class Node {
     constructor(value){
       this.left = null;
@@ -27,61 +11,45 @@ class Node {
       this.root = null;
     }
     insert(value){
-      let newnode = new Node(value);
-      if( this.root === null ){
-        this.root = newnode;    
-        return this;
-      }else{
+      const newNode = new Node(value);
+      if (this.root === null) {
+        this.root = newNode;
+      } else {
         let currentNode = this.root;
         while(true){
           if(value < currentNode.value){
-            if (currentNode.left == null){
-                currentNode.left = newnode;
-                return this;
-            }else {
-              currentNode = currentNode.left;
+            //Left
+            if(!currentNode.left){
+              currentNode.left = newNode;
+              return this;
             }
-          }else {
-            if (currentNode.right == null){
-                currentNode.right = newnode;
-                return this;
-            }else {
-              currentNode = currentNode.right;
-            }
-          }
-        }
-      }
-      
-    }
-    lookup(value){
-      //Code here
-      let lookupNode = new Node(value);
-      let currentNode = this.root;
-      if(currentNode === null){
-        console.log("no node exist");
-        return false;
-      }else if ( currentNode.value === lookupNode.value ){
-        console.log('value exist')
-        return currentNode;
-      }else { while ( true ){
-        if( lookupNode.value < currentNode.value ){
-          if(currentNode.value === lookupNode.value){
-            console.log('exists');
-            return currentNode;
-          }else{
             currentNode = currentNode.left;
-          }
-        } else { 
-          if(currentNode.value === lookupNode.value){
-            console.log('exists');
-            return currentNode;
-          }else{
+          } else {
+            //Right
+            if(!currentNode.right){
+              currentNode.right = newNode;
+              return this;
+            } 
             currentNode = currentNode.right;
           }
         }
+      }
+    }
+    lookup(value){
+      if (!this.root) {
+        return false;
+      }
+      let currentNode = this.root;
+      while(currentNode){
+        if(value < currentNode.value){
+          currentNode = currentNode.left;
+        } else if(value > currentNode.value){
+          currentNode = currentNode.right;
+        } else if (currentNode.value === value) {
+          return currentNode;
         }
       }
-     
+      return null
     }
     remove(value) {
         if (!this.root) {
@@ -167,14 +135,14 @@ class Node {
   const tree = new BinarySearchTree();
   tree.insert(9)
   tree.insert(4)
-  tree.insert(20)
   tree.insert(6)
+  tree.insert(20)
   tree.insert(170)
   tree.insert(15)
   tree.insert(1)
-  tree.lookup(20)
-
   // JSON.stringify(traverse(tree.root))
+  tree.lookup(15);
+  tree.lookup(7);
   
   //     9
   //  4     20
